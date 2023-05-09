@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author antot
- *
- */
-module spacegame {
-}
