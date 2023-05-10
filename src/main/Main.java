@@ -21,6 +21,9 @@ public class Main implements Runnable {
 		//System.out.println("Initializing Game!");
 		
 		window = new Window(WIDTH, HEIGHT, "Game");
+		
+		window.setBackgroundColor(.5f, .5f, .5f);
+		
 		window.create();
 		
 	}
@@ -33,8 +36,7 @@ public class Main implements Runnable {
 			update();
 			render();
 			
-			// close window if escape is hit
-			if (Input.isKeyDown(GLFW.GLFW_KEY_ESCAPE)) return;
+			if (Input.isKeyDown(GLFW.GLFW_KEY_F11)) window.setFullscreen(!window.isFullscreen());
 			
 		}
 		
@@ -48,7 +50,7 @@ public class Main implements Runnable {
 		window.update();
 		
 		// test mouse
-		if (Input.isButtonDown(GLFW.GLFW_MOUSE_BUTTON_LEFT)) System.out.println("Mouse is at: ("+ Input.getMouseX() + ", " + Input.getMouseY() +")");
+		if (Input.isButtonDown(GLFW.GLFW_MOUSE_BUTTON_LEFT)) System.out.println("Mouse is at: ("+ Input.getMouseX() + ", " + Input.getMouseY() +"), scrolled at: (" + + Input.getScrollX() + ", " + Input.getScrollY() +")" );
 		
 	}
 	
