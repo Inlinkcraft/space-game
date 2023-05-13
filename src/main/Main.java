@@ -2,6 +2,7 @@ package main;
 
 import engine.graphics.Mesh;
 import engine.graphics.Renderer;
+import engine.graphics.Shader;
 import engine.graphics.Vertex;
 
 import engine.maths.Vector3f;
@@ -19,6 +20,8 @@ public class Main implements Runnable {
 	public Window window;
 	
 	public Renderer renderer;
+	
+	public Shader shader;
 	
 	public Mesh mesh = new Mesh(new Vertex[] {
 		
@@ -43,13 +46,16 @@ public class Main implements Runnable {
 		//System.out.println("Initializing Game!");
 		
 		window = new Window(WIDTH, HEIGHT, "Game");
-		renderer = new Renderer();
+		
+		shader = new Shader("/shaders/mainVertex.glsl", "/shaders/mainFragment.glsl");
+		
+		renderer = new Renderer(shader);
 		
 		window.setBackgroundColor(1f, 0f, 0f);
 		
 		window.create();
-		
 		mesh.create();
+		shader.create();
 		
 	}
 	

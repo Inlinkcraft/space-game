@@ -6,6 +6,12 @@ import org.lwjgl.opengl.GL30;
 
 public class Renderer {
 
+	private Shader shader;
+	
+	public Renderer(Shader shader) {
+		this.shader = shader;
+	}
+	
 	public void renderMesh(Mesh mesh) {
 		
 		GL30.glBindVertexArray(mesh.getVAO());
@@ -15,7 +21,11 @@ public class Renderer {
 		
 		GL11.glDrawElements(GL11.GL_TRIANGLES, mesh.getIndices().length, GL11.GL_UNSIGNED_INT, 0);
 		
+		shader.bind();
+		
 		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
+		
+		shader.unbind();
 		
 		GL30.glDisableVertexAttribArray(0);
 		GL30.glBindVertexArray(0);
