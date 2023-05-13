@@ -1,10 +1,11 @@
 package main;
 
+import engine.graphics.Material;
 import engine.graphics.Mesh;
 import engine.graphics.Renderer;
 import engine.graphics.Shader;
 import engine.graphics.Vertex;
-
+import engine.maths.Vector2f;
 import engine.maths.Vector3f;
 
 import org.lwjgl.glfw.GLFW;
@@ -25,17 +26,17 @@ public class Main implements Runnable {
 	
 	public Mesh mesh = new Mesh(new Vertex[] {
 		
-		new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f)),
-		new Vertex(new Vector3f(0.5f, 0.5f, 0.0f)),
-		new Vertex(new Vector3f(0.5f, -0.5f, 0.0f)),
-		new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f)),
+		new Vertex(new Vector3f(-0.5f,  0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f), new Vector2f(0.0f, 0.0f)),
+		new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f), new Vector3f(0.0f, 1.0f, 0.0f), new Vector2f(0.0f, 1.0f)),
+		new Vertex(new Vector3f( 0.5f, -0.5f, 0.0f), new Vector3f(0.0f, 0.0f, 1.0f), new Vector2f(1.0f, 1.0f)),
+		new Vertex(new Vector3f( 0.5f,  0.5f, 0.0f), new Vector3f(1.0f, 1.0f, 0.0f), new Vector2f(1.0f, 0.0f)),
 			
 	}, new int[] {
 		
 		0, 1, 2,
 		0, 3, 2		
 		
-	});
+	}, new Material("/textures/beautiful.png"));
 	
 	public void start() {
 		game = new Thread(this, "game");
@@ -71,7 +72,7 @@ public class Main implements Runnable {
 			
 		}
 		
-		window.destroy();
+		close();
 		
 	}
 	
@@ -91,6 +92,14 @@ public class Main implements Runnable {
 		renderer.renderMesh(mesh);
 		
 		window.swapBuffers();
+		
+	}
+	
+	private void close() {
+		
+		window.destroy();
+		mesh.destroy();
+		shader.destroy();
 		
 	}
 	
