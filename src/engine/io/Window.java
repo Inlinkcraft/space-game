@@ -6,6 +6,8 @@ import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
+import engine.maths.Vector3f;
+
 public class Window {
 	
 	public static long time;
@@ -19,7 +21,7 @@ public class Window {
 	private int width, height;
 	private int[] windowPosX = new int[1], windowPosY = new int[1];
 	
-	private float backgroundR, backgroundG, backgroundB;
+	private Vector3f backgroundColor = new Vector3f(0f, 0f, 0f);
 	
 	private GLFWWindowSizeCallback sizeCallback;
 	private boolean isResized;
@@ -77,7 +79,7 @@ public class Window {
 			isResized = false;
 		}
 		
-		GL11.glClearColor(backgroundR, backgroundG, backgroundB, 1.0f);
+		GL11.glClearColor(backgroundColor.getX(), backgroundColor.getY(), backgroundColor.getZ(), 1.0f);
 		
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 		
@@ -94,9 +96,7 @@ public class Window {
 	}
 	
 	public void setBackgroundColor(float r, float g, float b) {
-		backgroundR = r;
-		backgroundG = g;
-		backgroundB = b;
+		backgroundColor.set(r, g, b);
 	}
 	
 	public void swapBuffers() {
